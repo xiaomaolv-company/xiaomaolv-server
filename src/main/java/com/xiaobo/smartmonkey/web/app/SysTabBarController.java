@@ -1,6 +1,7 @@
 package com.xiaobo.smartmonkey.web.app;
 
 import com.xiaobo.smartmonkey.Service.AppService;
+import com.xiaobo.smartmonkey.entity.AppResponse;
 import com.xiaobo.smartmonkey.util.WeChat.SignUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,9 +25,15 @@ public class SysTabBarController {
      * @return
      */
     @RequestMapping(value = "/app/SysTabBarController/queryAllTabBar")
-    public List<HashMap<String,Object>> queryAllTabBar(){
+    public AppResponse queryAllTabBar(){
+        AppResponse appResponse = new AppResponse();
         System.out.println("进入放啊");
-        return appService.queryAllTabBar();
+        List<HashMap<String,Object>> appData = appService.queryAllTabBar();
+
+        appResponse.setAppData(appData);
+        appResponse.setMessage("成功返回底部菜单信息");
+        appResponse.setStatusCode(200);
+        return appResponse;
     }
 
     /**
@@ -34,7 +41,11 @@ public class SysTabBarController {
      * @return   nc -z -w 1 172.81.203.18:8080
      */
     @RequestMapping(value = "/app/SysTabBarController/queryAllFuncList")
-    public List<HashMap<String,Object>> queryAllFuncList(){
-        return appService.queryAllFunc();
+    public AppResponse queryAllFuncList(){
+        AppResponse appResponse = new AppResponse();
+        List<HashMap<String,Object>> appData = appService.queryAllFunc();
+        appResponse.setMessage("成功返回功能菜单信息");
+        appResponse.setStatusCode(200);
+        return appResponse;
     }
 }
