@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaobo.smartmonkey.dao.AppDao">
+    <select id="queryAllTabBar" resultType="java.util.HashMap">
+        select
+        id,
+        uuid,
+        name,
+        code,
+        level,
+        parentId,
+        fullName,
+        registDatetime
+        from
+        systabbar
+    </select>
+    <select id="queryAllFunc" resultType="java.util.HashMap">
+        SELECT
+        id,
+        uuid,
+        name,
+        fullName,
+        code,
+        registDatetime
+        from
+        sysfuncmenu
+    </select>
+</mapper>
