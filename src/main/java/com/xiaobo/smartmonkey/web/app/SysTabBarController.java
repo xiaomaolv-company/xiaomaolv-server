@@ -44,6 +44,7 @@ public class SysTabBarController {
     public AppResponse queryAllFuncList(){
         AppResponse appResponse = new AppResponse();
         List<HashMap<String,Object>> appData = appService.queryAllFunc();
+        appResponse.setAppData(appData);
         appResponse.setMessage("成功返回功能菜单信息");
         appResponse.setStatusCode(200);
         return appResponse;
