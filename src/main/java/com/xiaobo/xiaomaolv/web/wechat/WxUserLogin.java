@@ -1,7 +1,6 @@
-package com.xiaobo.smartmonkey.web.wechat;
+package com.xiaobo.xiaomaolv.web.wechat;
 
-import com.xiaobo.smartmonkey.util.WeChat.SignUtil;
-import org.springframework.stereotype.Controller;
+import com.xiaobo.xiaomaolv.util.WeChat.SignUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

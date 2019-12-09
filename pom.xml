@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.xiaobo</groupId>
-    <artifactId>smartmonkey</artifactId>
+    <artifactId>xiaomaolv</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>smartmonkey</name>
+    <name>xiaomaolv</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

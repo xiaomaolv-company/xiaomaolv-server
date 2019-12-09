@@ -1,4 +1,4 @@
-package com.xiaobo.smartmonkey.dao;
+package com.xiaobo.xiaomaolv.dao;
 
 import java.util.HashMap;
 import java.util.List;

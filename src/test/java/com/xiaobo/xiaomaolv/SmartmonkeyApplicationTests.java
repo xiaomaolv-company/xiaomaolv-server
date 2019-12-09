@@ -1,4 +1,4 @@
-package com.xiaobo.smartmonkey;
+package com.xiaobo.xiaomaolv;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

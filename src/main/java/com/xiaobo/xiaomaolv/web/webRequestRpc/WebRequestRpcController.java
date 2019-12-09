@@ -1,6 +1,6 @@
-package com.xiaobo.smartmonkey.web.webRequestRpc;
+package com.xiaobo.xiaomaolv.web.webRequestRpc;
 
-import com.xiaobo.smartmonkey.entity.AppResponse;
+import com.xiaobo.xiaomaolv.entity.AppResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

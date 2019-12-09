@@ -1,4 +1,4 @@
-package com.xiaobo.smartmonkey.util.WeChat;
+package com.xiaobo.xiaomaolv.util.WeChat;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

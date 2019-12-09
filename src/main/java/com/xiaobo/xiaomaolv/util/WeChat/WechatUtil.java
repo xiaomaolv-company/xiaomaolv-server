@@ -1,27 +1,20 @@
-package com.imooc.o2o.util.wechat;
+package com.xiaobo.xiaomaolv.util.WeChat;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.ConnectException;
-import java.net.URL;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xiaobo.xiaomaolv.dto.UserAccessToken;
+import com.xiaobo.xiaomaolv.dto.WechatUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imooc.o2o.dto.UserAccessToken;
-import com.imooc.o2o.dto.WechatUser;
-import com.imooc.o2o.entity.PersonInfo;
+import java.io.*;
+import java.net.ConnectException;
+import java.net.URL;
 
 /**
  * 微信工具类
@@ -42,10 +35,10 @@ public class WechatUtil {
 	 */
 	public static UserAccessToken getUserAccessToken(String code) throws IOException {
 		// 测试号信息里的appId
-		String appId = "wxd7f6c5b8899fba83";
+		String appId = "wxa71ab380527ceb2a";
 		log.debug("appId:" + appId);
 		// 测试号信息里的appsecret
-		String appsecret = "665ae80dba31fc91ab6191e7da4d676d";
+		String appsecret = "631ffe1d44750a5c892c0a277f4917a8";
 		log.debug("secret:" + appsecret);
 		// 根据传入的code,拼接出访问微信定义好的接口的URL
 		String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appId + "&secret=" + appsecret
@@ -111,20 +104,7 @@ public class WechatUtil {
 		return user;
 	}
 
-	/**
-	 * 将WechatUser里的信息转换成PersonInfo的信息并返回PersonInfo实体类
-	 * 
-	 * @param user
-	 * @return
-	 */
-	public static PersonInfo getPersonInfoFromRequest(WechatUser user) {
-		PersonInfo personInfo = new PersonInfo();
-		personInfo.setName(user.getNickName());
-		personInfo.setGender(user.getSex() + "");
-		personInfo.setProfileImg(user.getHeadimgurl());
-		personInfo.setEnableStatus(1);
-		return personInfo;
-	}
+
 
 	/**
 	 * 发起https请求并获取结果

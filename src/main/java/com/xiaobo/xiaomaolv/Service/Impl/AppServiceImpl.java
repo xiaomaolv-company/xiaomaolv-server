@@ -1,7 +1,7 @@
-package com.xiaobo.smartmonkey.Service.Impl;
+package com.xiaobo.xiaomaolv.Service.Impl;
 
-import com.xiaobo.smartmonkey.Service.AppService;
-import com.xiaobo.smartmonkey.dao.AppDao;
+import com.xiaobo.xiaomaolv.Service.AppService;
+import com.xiaobo.xiaomaolv.dao.AppDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

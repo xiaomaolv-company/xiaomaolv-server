@@ -1,4 +1,4 @@
-package com.xiaobo.smartmonkey.entity;
+package com.xiaobo.xiaomaolv.entity;
 
 import lombok.Data;
 
