@@ -1,17 +1,11 @@
-package com.xiaobo.smartmonkey.web.app;
+package com.xiaobo.xiaomaolv.web.app;
 
-import com.xiaobo.smartmonkey.Service.AppService;
-import com.xiaobo.smartmonkey.entity.AppResponse;
-import com.xiaobo.smartmonkey.util.WeChat.SignUtil;
+import com.xiaobo.xiaomaolv.Service.AppService;
+import com.xiaobo.xiaomaolv.entity.AppResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,9 +21,7 @@ public class SysTabBarController {
     @RequestMapping(value = "/app/SysTabBarController/queryAllTabBar")
     public AppResponse queryAllTabBar(){
         AppResponse appResponse = new AppResponse();
-        System.out.println("进入放啊");
         List<HashMap<String,Object>> appData = appService.queryAllTabBar();
-
         appResponse.setAppData(appData);
         appResponse.setMessage("成功返回底部菜单信息");
         appResponse.setStatusCode(200);
