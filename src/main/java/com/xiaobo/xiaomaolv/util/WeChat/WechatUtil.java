@@ -45,6 +45,7 @@ public class WechatUtil {
 				+ "&code=" + code + "&grant_type=authorization_code";
 		// 向相应URL发送请求获取token json字符串
 		String tokenStr = httpsRequest(url, "GET", null);
+		System.out.println("tokenStr"+tokenStr);
 		log.debug("userAccessToken:" + tokenStr);
 		UserAccessToken token = new UserAccessToken();
 		ObjectMapper objectMapper = new ObjectMapper();
