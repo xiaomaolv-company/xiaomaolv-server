@@ -13,6 +13,7 @@ import redis.clients.jedis.util.SafeEncoder;
 
 public class JedisUtil {
 
+
     private JedisPool jedisPool;
 
     public void setJedisPool(JedisPool jedisPool) {

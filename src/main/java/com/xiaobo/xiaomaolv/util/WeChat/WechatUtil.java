@@ -7,6 +7,7 @@ import com.xiaobo.xiaomaolv.dto.UserAccessToken;
 import com.xiaobo.xiaomaolv.dto.WechatUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -19,12 +20,18 @@ import java.net.URL;
 /**
  * 微信工具类
  * 
- * @author xiangze
+ * @author yanxiaobo
  *
  */
 public class WechatUtil {
 
 	private static Logger log = LoggerFactory.getLogger(WechatUtil.class);
+
+	@Value("${app.appID}")
+	private  static  String appID;
+
+	@Value("${app.appsecret}")
+	private static String appSecret;
 
 	/**
 	 * 获取UserAccessToken实体类
@@ -35,18 +42,18 @@ public class WechatUtil {
 	 */
 	public static UserAccessToken getUserAccessToken(String code) throws IOException {
 		// 测试号信息里的appId
-		String appId = "wxa71ab380527ceb2a";
-		log.debug("appId:" + appId);
+//		String appId = "wxa71ab380527ceb2a";
+		log.info("获取用户accessToken-->appId:" + appID);
 		// 测试号信息里的appsecret
-		String appsecret = "631ffe1d44750a5c892c0a277f4917a8";
-		log.debug("secret:" + appsecret);
+//		String appsecret = "631ffe1d44750a5c892c0a277f4917a8";
+		log.info("获取用户accessToken-->secret:" + appSecret);
 		// 根据传入的code,拼接出访问微信定义好的接口的URL
-		String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appId + "&secret=" + appsecret
+		String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appID + "&secret=" + appSecret
 				+ "&code=" + code + "&grant_type=authorization_code";
 		// 向相应URL发送请求获取token json字符串
 		String tokenStr = httpsRequest(url, "GET", null);
 		System.out.println("tokenStr"+tokenStr);
-		log.debug("userAccessToken:" + tokenStr);
+		log.info("userAccessToken:" + tokenStr);
 		UserAccessToken token = new UserAccessToken();
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
@@ -82,7 +89,7 @@ public class WechatUtil {
 				+ "&lang=zh_CN";
 		// 访问该URL获取用户信息json 字符串
 		String userStr = httpsRequest(url, "GET", null);
-		log.debug("user info :" + userStr);
+		log.info("user info :" + userStr);
 		WechatUser user = new WechatUser();
 		ObjectMapper objectMapper = new ObjectMapper();
 		try {
@@ -164,7 +171,7 @@ public class WechatUtil {
 			inputStream.close();
 			inputStream = null;
 			httpUrlConn.disconnect();
-			log.debug("https buffer:" + buffer.toString());
+			log.info("https buffer:" + buffer.toString());
 		} catch (ConnectException ce) {
 			log.error("Weixin server connection timed out.");
 		} catch (Exception e) {

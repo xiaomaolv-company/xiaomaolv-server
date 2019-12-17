@@ -2,10 +2,12 @@ package com.xiaobo.xiaomaolv.web.app;
 
 import com.xiaobo.xiaomaolv.Service.AppService;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
+import com.xiaobo.xiaomaolv.entity.SysUser;
 import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +28,7 @@ public class SysTabBarController {
      * @return
      */
     @RequestMapping(value = "/app/SysTabBarController/queryAllTabBar")
-    public AppResponse queryAllTabBar(){
+    public AppResponse queryAllTabBar(SysUser sysUser){
         AppResponse appResponse = new AppResponse();
         List<HashMap<String,Object>> appData = appService.queryAllTabBar();
         appResponse.setAppData(appData);

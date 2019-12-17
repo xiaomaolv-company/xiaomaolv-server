@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaobo.xiaomaolv.dao.SysOperationDao">
+    <insert id="addOperation" parameterType="com.xiaobo.xiaomaolv.entity.SysOperation">
+        insert into sysoperation
+        (id,
+        uuid,
+        userId,
+        optDatetime,
+        optDecription,
+        remark,
+        type
+        )
+        VALUES (
+          #{id},#{uuid},#{userId},#{optDatetime},#{optDecription},#{remark},#{type}
+          )
+    </insert>
+
+</mapper>

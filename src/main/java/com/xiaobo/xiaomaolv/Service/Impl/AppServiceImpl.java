@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class AppServiceImpl implements AppService {
-    @Autowired(required = false)
+    @Autowired
     private AppDao appDao;
     @Override
     public List<HashMap<String, Object>> queryAllTabBar() {

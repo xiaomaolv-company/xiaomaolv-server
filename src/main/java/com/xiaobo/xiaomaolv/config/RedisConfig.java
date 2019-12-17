@@ -34,6 +34,11 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Value("${redis.pool.testOnBorrow}")
     private boolean testOnBorrow;
 
+    @Value("${redis.password}")
+    private String password;
+    @Value("${redis.timeout}")
+    private int timeOut;
+
     @Autowired
     private JedisPool jedisPool;
 
@@ -45,7 +50,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
         jedisPoolConfig.setTestOnBorrow(testOnBorrow);
-        JedisPool jedisPool = new JedisPool(jedisPoolConfig,hostName,port);
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig,hostName,port,timeOut,password);
         logger.info("JedisPool注入成功");
         logger.info("redis地址:"+hostName+",端口:"+port);
         return jedisPool;
