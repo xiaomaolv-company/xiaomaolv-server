@@ -12,4 +12,5 @@ public class SysTabBar {
     private long parentId;
     private String fullName;
     private String registDatetime;
+    private String icon;
 }

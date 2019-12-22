@@ -1,5 +1,6 @@
 package com.xiaobo.xiaomaolv.web.app;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xiaobo.xiaomaolv.Service.SysUserService;
 import com.xiaobo.xiaomaolv.Service.VisitLogService;
 import com.xiaobo.xiaomaolv.dto.UserAccessToken;
@@ -19,10 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -129,13 +133,19 @@ public class UserLogin {
 
     @RequestMapping(value = "/userLoginDev",method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public AppResponse weChatUserLoginDev(SysUser sysUser,HttpServletRequest request) {
-        log.info("登陆用户id"+sysUser.getId());
+    public AppResponse weChatUserLoginDev(SysUser sysUser,HttpServletRequest request, HttpServletResponse response) throws Exception {
+        OutputStream outputStream =  response.getOutputStream();
+        log.info("登陆用户1id"+sysUser.getId());
         AppResponse appResponse = new AppResponse();
         HttpSession session = request.getSession();
         session.setAttribute("userId",sysUser.getId());
         appResponse.setAppData(sysUser);
         appResponse.setMessage("登陆成功");
+        ObjectMapper objectMapper = new ObjectMapper();
+        String str = objectMapper.writeValueAsString(appResponse);
+        outputStream.write(str.getBytes("UTF-8"));
+        outputStream.flush();
+        outputStream.close();
         return appResponse;
     }
 

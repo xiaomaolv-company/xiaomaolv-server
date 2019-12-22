@@ -1,9 +1,13 @@
 package com.xiaobo.xiaomaolv.service;
 
+import com.xiaobo.xiaomaolv.Service.AppService;
 import com.xiaobo.xiaomaolv.Service.SysUserService;
+import com.xiaobo.xiaomaolv.entity.CostRecorder;
 import com.xiaobo.xiaomaolv.entity.SysUser;
 import com.xiaobo.xiaomaolv.util.IdUtils;
 import com.xiaobo.xiaomaolv.util.OperationLogUtil;
+import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,11 @@ public class SysUserServiceTest {
     private SysUserService sysUserService;
     @Autowired
     private OperationLogUtil operationLogUtil;
+    @Autowired
+    private AppService appService;
+    @Autowired
+    private JedisUtil jedisUtil;
+
     @Test
     public void userServiceTest(){
         SysUser sysUser = new SysUser();
@@ -36,5 +45,9 @@ public class SysUserServiceTest {
     public void operationTest(){
         int i = operationLogUtil.addOperation(10001,"测试记录","备注");
         assert i>0;
+    }
+
+    @Test
+    public void costRecorder(){
     }
 }
