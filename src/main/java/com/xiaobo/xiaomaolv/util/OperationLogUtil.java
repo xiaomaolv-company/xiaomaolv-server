@@ -10,14 +10,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class OperationLogUtil {
 
-    @Autowired
     private VisitLogService visitLogService;
-    @Autowired
+
     private SysOperationService sysOperationService;
-    @Autowired
+
     private JedisUtil jedisUtil;
 
+    public void setVisitLogService(VisitLogService visitLogService) {
+        this.visitLogService = visitLogService;
+    }
 
+    public void setSysOperationService(SysOperationService sysOperationService) {
+        this.sysOperationService = sysOperationService;
+    }
+
+    public void setJedisUtil(JedisUtil jedisUtil) {
+        this.jedisUtil = jedisUtil;
+    }
+
+    /**
+     * 记录来访用户
+     * @param userName
+     * @param userId
+     * @return
+     */
     public int addVisitUser(String userName, long userId){
         VisitLog visitLog = new VisitLog();
         visitLog.setId(jedisUtil.generateId());
@@ -29,6 +45,13 @@ public class OperationLogUtil {
         return visitLogService.addVisitLog(visitLog);
     }
 
+    /**
+     * 添加操作记录
+     * @param userId
+     * @param description
+     * @param remark
+     * @return
+     */
     public int addOperation(long userId,String description,String remark){
         SysOperation sysOperation = new SysOperation();
         sysOperation.setId(jedisUtil.generateId());

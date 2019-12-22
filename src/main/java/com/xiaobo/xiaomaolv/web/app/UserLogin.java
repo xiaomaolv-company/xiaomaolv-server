@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -111,6 +112,9 @@ public class UserLogin {
                         appResponse.setMessage("验证成功");
                     }
                 }
+                HttpSession session = request.getSession();
+                session.setAttribute("userId",sysUser.getId());
+                session.setAttribute("userName",sysUser.getName());
                 //向来访记录表插入来访记录
                 operationLogUtil.addVisitUser(sysUser.getName(),sysUser.getId());
                 appResponse.setAppData(map);

@@ -40,22 +40,42 @@ public class RedisConfig extends CachingConfigurerSupport {
     private int timeOut;
 
     @Autowired
+    private JedisPoolConfig jedisPoolConfig;
+
+    @Autowired
     private JedisPool jedisPool;
 
 
+    /**
+     * 创建redis连接池的设置
+     * @return
+     */
     @Bean
-    public JedisPool redisPoolFactory(){
+    public JedisPoolConfig jedisPoolConfig(){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxTotal(maxTotal);
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
         jedisPoolConfig.setTestOnBorrow(testOnBorrow);
+        return jedisPoolConfig;
+    }
+
+    /**
+     *创建redis连接池
+     * @return
+     */
+    @Bean
+    public JedisPool redisPoolFactory(){
         JedisPool jedisPool = new JedisPool(jedisPoolConfig,hostName,port,timeOut,password);
         logger.info("JedisPool注入成功");
         logger.info("redis地址:"+hostName+",端口:"+port);
         return jedisPool;
     }
 
+    /**
+     *创建redis的工具类  封装redis的连接以进行相关操作
+     * @return
+     */
     @Bean
     public JedisUtil jedisUtil(){
         JedisUtil jedisUtil = new JedisUtil();

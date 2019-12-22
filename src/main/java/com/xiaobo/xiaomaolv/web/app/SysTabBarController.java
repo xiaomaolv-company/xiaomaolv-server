@@ -1,34 +1,33 @@
 package com.xiaobo.xiaomaolv.web.app;
 
 import com.xiaobo.xiaomaolv.Service.AppService;
+import com.xiaobo.xiaomaolv.Service.AresController;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.SysUser;
-import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
-@RestController
-public class SysTabBarController {
+@Component
+public class SysTabBarController implements AresController {
     static Logger log = LoggerFactory.getLogger(SysTabBarController.class);
 
     @Autowired
     private AppService appService;
-    @Autowired
-    private JedisUtil jedisUtil;
 
     /**
      * 获取底部bar菜单
      * @return
      */
     @RequestMapping(value = "/app/SysTabBarController/queryAllTabBar")
-    public AppResponse queryAllTabBar(SysUser sysUser){
+    public AppResponse queryAllTabBar(SysUser sysUser, HttpServletRequest request){
         AppResponse appResponse = new AppResponse();
         List<HashMap<String,Object>> appData = appService.queryAllTabBar();
         appResponse.setAppData(appData);
