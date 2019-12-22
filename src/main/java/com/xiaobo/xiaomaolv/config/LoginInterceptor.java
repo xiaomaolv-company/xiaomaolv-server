@@ -36,7 +36,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             String methodName = ((HandlerMethod) handler).getMethod().getName();
             logger.info("请求方法名:"+methodName);
             //如果请求时登陆请求就通过
-            if("userLogin".equals(methodName)){
+            if("userLogin".equals(methodName) || "weChatUserLoginDev".equals(methodName)){
                 return true;
             }
             //获取请求session  参数false 如果有session通过  没有就不新建session
