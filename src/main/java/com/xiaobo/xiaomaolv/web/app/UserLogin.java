@@ -126,4 +126,17 @@ public class UserLogin {
         return appResponse;
     }
 
+
+    @RequestMapping(value = "/userLoginDev",method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public AppResponse weChatUserLoginDev(SysUser sysUser,HttpServletRequest request) {
+        log.info("登陆用户id"+sysUser.getId());
+        AppResponse appResponse = new AppResponse();
+        HttpSession session = request.getSession();
+        session.setAttribute("userId",sysUser.getId());
+        appResponse.setAppData(sysUser);
+        appResponse.setMessage("登陆成功");
+        return appResponse;
+    }
+
 }
