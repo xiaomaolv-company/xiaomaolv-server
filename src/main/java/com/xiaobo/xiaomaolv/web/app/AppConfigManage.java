@@ -1,24 +1,23 @@
 package com.xiaobo.xiaomaolv.web.app;
 
 import com.xiaobo.xiaomaolv.Service.AppService;
-import com.xiaobo.xiaomaolv.Service.AresController;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.SysUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
-@Controller
-public class SysTabBarController implements AresController {
-    static Logger log = LoggerFactory.getLogger(SysTabBarController.class);
+@RestController
+public class AppConfigManage{
+
+    Logger log = LoggerFactory.getLogger(AppConfigManage.class);
 
     @Autowired
     private AppService appService;
@@ -27,7 +26,7 @@ public class SysTabBarController implements AresController {
      * 获取底部bar菜单
      * @return
      */
-    @RequestMapping(value = "/app/SysTabBarController/queryAllTabBar")
+    @RequestMapping(value = "/queryAllTabBar",method = {RequestMethod.GET})
     public AppResponse queryAllTabBar(SysUser sysUser, HttpServletRequest request){
         AppResponse appResponse = new AppResponse();
         List<HashMap<String,Object>> appData = appService.queryAllTabBar();
@@ -37,17 +36,5 @@ public class SysTabBarController implements AresController {
         return appResponse;
     }
 
-    /**
-     * 获取功能区菜单
-     * @return   nc -z -w 1 172.81.203.18:8080
-     */
-    @RequestMapping(value = "/app/SysTabBarController/queryAllFuncList")
-    public AppResponse queryAllFuncList(){
-        AppResponse appResponse = new AppResponse();
-        List<HashMap<String,Object>> appData = appService.queryAllFunc();
-        appResponse.setAppData(appData);
-        appResponse.setMessage("成功返回功能菜单信息");
-        appResponse.setStatusCode(200);
-        return appResponse;
-    }
+
 }

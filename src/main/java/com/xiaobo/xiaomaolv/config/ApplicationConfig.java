@@ -2,7 +2,6 @@ package com.xiaobo.xiaomaolv.config;
 
 import com.xiaobo.xiaomaolv.Service.SysOperationService;
 import com.xiaobo.xiaomaolv.Service.VisitLogService;
-import com.xiaobo.xiaomaolv.entity.SysTabBar;
 import com.xiaobo.xiaomaolv.util.OperationLogUtil;
 import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
 import org.slf4j.Logger;
@@ -48,14 +47,9 @@ public class ApplicationConfig implements WebMvcConfigurer, BeanPostProcessor {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor);
+//        registry.addInterceptor(loginInterceptor);
         logger.info("登录拦截器注册成功");
     }
 
-    @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        logger.info("开始初始化bean:"+bean.getClass().getSimpleName());
-        logger.info("开始初始化bean:"+beanName);
-        return null;
-    }
+
 }
