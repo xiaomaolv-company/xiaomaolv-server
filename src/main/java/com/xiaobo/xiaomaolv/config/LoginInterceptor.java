@@ -34,6 +34,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if(handler instanceof HandlerMethod){
             String methodName = ((HandlerMethod) handler).getMethod().getName();
+            logger.info("请求方法名:"+methodName);
             //如果请求时登陆请求就通过
             if("userLogin".equals(methodName)){
                 return true;
