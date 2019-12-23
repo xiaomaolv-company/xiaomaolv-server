@@ -15,6 +15,7 @@ import java.util.List;
  * 记账
  */
 @RestController
+@RequestMapping(value = "/app")
 public class AppAccountManage {
 
     @Autowired
