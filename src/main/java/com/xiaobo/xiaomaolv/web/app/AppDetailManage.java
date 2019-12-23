@@ -36,7 +36,7 @@ public class AppDetailManage {
     }
 
     @RequestMapping(value = "/queryCostList",method = RequestMethod.POST)
-    public AppResponse queryCostListByUserId(CostRecorder costRecorder){
+    public AppResponse queryCostListByUserId(@RequestBody CostRecorder costRecorder){
         return appDetailService.queryCostDetail(costRecorder);
     }
 
