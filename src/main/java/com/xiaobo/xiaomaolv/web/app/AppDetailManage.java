@@ -19,9 +19,9 @@ public class AppDetailManage {
     @RequestMapping(value = "/addCostDetail",method = RequestMethod.POST)
     public AppResponse addCost(@RequestBody CostRecorder costRecorder, HttpServletRequest request, HttpServletResponse response){
         AppResponse appResponse = new AppResponse();
-        response.setHeader("connection", "keep-alive");
-        long userId = (Long) request.getSession().getAttribute("userId");
-        costRecorder.setUserId(userId);
+//        response.setHeader("connection", "keep-alive");
+//        long userId = (Long) request.getSession().getAttribute("userId");
+//        costRecorder.setUserId(userId);
         int result = appDetailService.addCostRecorder(costRecorder);
         if(result==1){
             appResponse.setMessage("添加成功");

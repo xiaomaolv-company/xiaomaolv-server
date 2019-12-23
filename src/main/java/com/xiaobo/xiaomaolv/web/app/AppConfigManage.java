@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/app")
 public class AppConfigManage{
 
     Logger log = LoggerFactory.getLogger(AppConfigManage.class);
