@@ -17,4 +17,12 @@
         )
 
     </insert>
+    <select id="queryDetail" parameterType="com.xiaobo.xiaomaolv.entity.CostRecorder"
+            resultType="com.xiaobo.xiaomaolv.entity.CostRecorder">
+        select
+        *
+        from
+        costrecorder
+        where userId=#{userId}
+    </select>
 </mapper>
