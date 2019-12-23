@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.OutputStream;
 
 /**
  * 开发测试登陆
@@ -21,13 +20,14 @@ public class LoginDev {
     @RequestMapping("loginDev")
     public AppResponse loginDev(HttpServletRequest request, HttpServletResponse response, SysUser sysUser) throws Exception{
         response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Method", "*");
-        response.addHeader("Access-Control-Allow-Headers","Content-Type");
-        response.addHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("connection", "keep-alive");
+//        response.addHeader("Access-Control-Allow-Method", "*");
+//        response.addHeader("Access-Control-Allow-Headers","Content-Type");
+//        response.addHeader("Access-Control-Max-Age", "3600");
         AppResponse appResponse = new AppResponse();
-        OutputStream outputStream =  response.getOutputStream();
         log.info("登陆用户id"+sysUser.getId());
         HttpSession session = request.getSession();
+        log.info(session.getId()+"sessionID");
         session.setAttribute("userId",sysUser.getId());
         appResponse.setAppData(sysUser);
         appResponse.setMessage("登陆成功");

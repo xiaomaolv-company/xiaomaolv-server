@@ -1,5 +1,6 @@
 package com.xiaobo.xiaomaolv.Service;
 
+import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.CostRecorder;
 
 public interface AppDetailService {
@@ -9,4 +10,6 @@ public interface AppDetailService {
      * @return
      */
     int addCostRecorder(CostRecorder costRecorder);
+
+    AppResponse queryCostDetail(CostRecorder costRecorder);
 }

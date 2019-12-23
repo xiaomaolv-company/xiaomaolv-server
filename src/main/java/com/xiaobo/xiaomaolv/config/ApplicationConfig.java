@@ -48,7 +48,7 @@ public class ApplicationConfig implements WebMvcConfigurer, BeanPostProcessor {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(loginInterceptor);
-        logger.info("登录拦截器注册成功");
+//        logger.info("登录拦截器注册成功");
     }
 
 

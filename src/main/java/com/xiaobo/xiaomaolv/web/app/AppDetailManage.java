@@ -1,31 +1,25 @@
 package com.xiaobo.xiaomaolv.web.app;
 
 import com.xiaobo.xiaomaolv.Service.AppDetailService;
-import com.xiaobo.xiaomaolv.Service.AppService;
-import com.xiaobo.xiaomaolv.dao.AppDetailDao;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.CostRecorder;
-import com.xiaobo.xiaomaolv.util.IdUtils;
-import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
+import com.xiaobo.xiaomaolv.entity.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@RequestMapping("/app")
 public class AppDetailManage {
     @Autowired
     private AppDetailService appDetailService;
-    @Autowired
-    private JedisUtil jedisUtil;
-
-//    private static HttpServletRequest request;
 
     @RequestMapping(value = "/addCostDetail",method = RequestMethod.POST)
-    public AppResponse addCost(CostRecorder costRecorder,HttpServletRequest request){
+    public AppResponse addCost(@RequestBody CostRecorder costRecorder, HttpServletRequest request, HttpServletResponse response){
         AppResponse appResponse = new AppResponse();
+        response.setHeader("connection", "keep-alive");
         long userId = (Long) request.getSession().getAttribute("userId");
         costRecorder.setUserId(userId);
         int result = appDetailService.addCostRecorder(costRecorder);
@@ -39,6 +33,11 @@ public class AppDetailManage {
             appResponse.setAppData(costRecorder);
         }
         return appResponse;
+    }
+
+    @RequestMapping(value = "/queryCostList",method = RequestMethod.POST)
+    public AppResponse queryCostListByUserId(CostRecorder costRecorder){
+        return appDetailService.queryCostDetail(costRecorder);
     }
 
 }

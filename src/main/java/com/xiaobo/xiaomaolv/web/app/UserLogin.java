@@ -130,23 +130,4 @@ public class UserLogin {
         return appResponse;
     }
 
-
-    @RequestMapping(value = "/userLoginDev",method = {RequestMethod.GET,RequestMethod.POST})
-    @ResponseBody
-    public AppResponse weChatUserLoginDev(SysUser sysUser,HttpServletRequest request, HttpServletResponse response) throws Exception {
-        OutputStream outputStream =  response.getOutputStream();
-        log.info("登陆用户1id"+sysUser.getId());
-        AppResponse appResponse = new AppResponse();
-        HttpSession session = request.getSession();
-        session.setAttribute("userId",sysUser.getId());
-        appResponse.setAppData(sysUser);
-        appResponse.setMessage("登陆成功");
-        ObjectMapper objectMapper = new ObjectMapper();
-        String str = objectMapper.writeValueAsString(appResponse);
-        outputStream.write(str.getBytes("UTF-8"));
-        outputStream.flush();
-        outputStream.close();
-        return appResponse;
-    }
-
 }
