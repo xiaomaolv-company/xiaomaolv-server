@@ -1,6 +1,7 @@
 package com.xiaobo.xiaomaolv.web.app;
 
 import com.xiaobo.xiaomaolv.Service.AppService;
+import com.xiaobo.xiaomaolv.constdata.Const;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.CostConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -26,10 +28,9 @@ public class AppAccountManage {
      * @return
      */
     @RequestMapping(value = "/queryCostType",method = {RequestMethod.GET})
-    public AppResponse queryCostTypeConfig(){
+    public AppResponse queryCostTypeConfig(HttpServletResponse response){
         List<CostConfig> costConfigs = appService.queryAllConfig();
-        AppResponse appResponse = new AppResponse(costConfigs,200,"费用类型信息返回成功");
-//        log.info("费用类型信息返回成功："+Sys);
+        AppResponse appResponse = new AppResponse(costConfigs, 200,Const.ERROR_MSG_QUERY_SUCCESS);
         return appResponse;
     }
 }

@@ -1,13 +1,11 @@
 package com.xiaobo.xiaomaolv.web.app;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xiaobo.xiaomaolv.Service.SysUserService;
-import com.xiaobo.xiaomaolv.Service.VisitLogService;
+import com.xiaobo.xiaomaolv.constdata.Const;
 import com.xiaobo.xiaomaolv.dto.UserAccessToken;
 import com.xiaobo.xiaomaolv.dto.WechatUser;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.SysUser;
-import com.xiaobo.xiaomaolv.entity.VisitLog;
 import com.xiaobo.xiaomaolv.util.IdUtils;
 import com.xiaobo.xiaomaolv.util.OperationLogUtil;
 import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
@@ -16,17 +14,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,17 +103,17 @@ public class UserLogin {
                     int status = sysUserService.addUser(sysUser);
                     if(status<=0){
                         map.put("user",null);
-                        appResponse.setStatusCode(0);
-                        appResponse.setMessage("验证失败");
+                        appResponse.setStatusCode(Const.ERROR_CODE_USER__LOGIN_SUCCESS);
+                        appResponse.setMessage(Const.ERROR_MSG_USER_LOGIN_SUCCESS);
                     }else{
                         map.put("user",sysUser);
-                        appResponse.setStatusCode(1);
-                        appResponse.setMessage("验证成功");
+                        appResponse.setStatusCode(Const.ERROR_CODE_USER__LOGIN_FAIL);
+                        appResponse.setMessage(Const.ERROR_MSG_USER_LOGIN_FAIL);
                     }
                 }
                 HttpSession session = request.getSession();
-                session.setAttribute("userId",sysUser.getId());
-                session.setAttribute("userName",sysUser.getName());
+                session.setAttribute(Const.USER_ID,sysUser.getId());
+                session.setAttribute(Const.USER_NAME,sysUser.getName());
                 //向来访记录表插入来访记录
                 operationLogUtil.addVisitUser(sysUser.getName(),sysUser.getId());
                 appResponse.setAppData(map);
@@ -129,5 +124,6 @@ public class UserLogin {
         }
         return appResponse;
     }
+
 
 }

@@ -1,8 +1,8 @@
 package com.xiaobo.xiaomaolv.web.app;
 
 import com.xiaobo.xiaomaolv.Service.AppService;
+import com.xiaobo.xiaomaolv.constdata.Const;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
-import com.xiaobo.xiaomaolv.entity.SysUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,11 +27,11 @@ public class AppConfigManage{
      * @return
      */
     @RequestMapping(value = "/queryAllTabBar",method = {RequestMethod.GET})
-    public AppResponse queryAllTabBar(SysUser sysUser, HttpServletRequest request){
+    public AppResponse queryAllTabBar(){
         AppResponse appResponse = new AppResponse();
         List<HashMap<String,Object>> appData = appService.queryAllTabBar();
         appResponse.setAppData(appData);
-        appResponse.setMessage("成功返回底部菜单信息");
+        appResponse.setMessage(Const.ERROR_MSG_QUERY_SUCCESS);
         appResponse.setStatusCode(200);
         return appResponse;
     }

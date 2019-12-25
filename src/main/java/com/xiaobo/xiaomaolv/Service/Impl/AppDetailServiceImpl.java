@@ -3,6 +3,7 @@ package com.xiaobo.xiaomaolv.Service.Impl;
 import com.xiaobo.xiaomaolv.Service.AppDetailService;
 import com.xiaobo.xiaomaolv.dao.AppDao;
 import com.xiaobo.xiaomaolv.dao.AppDetailDao;
+import com.xiaobo.xiaomaolv.dto.UserSession;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.CostRecorder;
 import com.xiaobo.xiaomaolv.util.IdUtils;
@@ -25,6 +26,7 @@ public class AppDetailServiceImpl implements AppDetailService {
     @Override
     public int addCostRecorder(CostRecorder costRecorder) {
         DateTime dateTime = new DateTime();
+        costRecorder.setUserId(UserSession.getUserId());
         costRecorder.setUuid(IdUtils.getUUid());
         costRecorder.setId(jedisUtil.generateId());
         costRecorder.setCreateDatetime(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
@@ -32,7 +34,9 @@ public class AppDetailServiceImpl implements AppDetailService {
     }
 
     @Override
-    public AppResponse queryCostDetail(CostRecorder costRecorder) {
+    public AppResponse queryCostDetail() {
+        CostRecorder costRecorder = new CostRecorder();
+        costRecorder.setUserId(UserSession.getUserId());
         List<CostRecorder> recorderList = appDetailDao.queryDetail(costRecorder);
         Map<String,Object> recorderMap = new HashMap<>();
         recorderMap.put("recorderList",recorderList);
