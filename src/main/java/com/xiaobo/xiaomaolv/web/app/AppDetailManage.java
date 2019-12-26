@@ -21,7 +21,7 @@ public class AppDetailManage {
         if(result==1){
             appResponse.setMessage(Const.ERROR_MSG_INSERT_SUCCESS);
             appResponse.setAppData(costRecorder);
-            appResponse.setStatusCode(200);
+            appResponse.setStatusCode(Const.SUCCESS_CODE_CALLBACK);
         }else{
             appResponse.setStatusCode(Const.ERROR_CODE_INSERT_FAIL);
             appResponse.setMessage(Const.ERROR_MSG_INSERT_SUCCESS);

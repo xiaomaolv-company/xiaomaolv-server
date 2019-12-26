@@ -37,7 +37,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if(handler instanceof HandlerMethod){
             String methodName = ((HandlerMethod) handler).getMethod().getName();
-            if("loginDev".equals(methodName) || "userLogin".equals(methodName)){
+            if("loginDev".equals(methodName) || "weChatUserLogin".equals(methodName)){
                 return true;
             }
             logger.info("请求方法名:"+methodName);

@@ -21,10 +21,6 @@ public class SysUserServiceTest {
     private SysUserService sysUserService;
     @Autowired
     private OperationLogUtil operationLogUtil;
-    @Autowired
-    private AppService appService;
-    @Autowired
-    private JedisUtil jedisUtil;
 
     @Test
     public void userServiceTest(){

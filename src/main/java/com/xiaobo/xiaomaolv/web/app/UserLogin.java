@@ -103,12 +103,12 @@ public class UserLogin {
                     int status = sysUserService.addUser(sysUser);
                     if(status<=0){
                         map.put("user",null);
-                        appResponse.setStatusCode(Const.ERROR_CODE_USER__LOGIN_SUCCESS);
-                        appResponse.setMessage(Const.ERROR_MSG_USER_LOGIN_SUCCESS);
-                    }else{
-                        map.put("user",sysUser);
                         appResponse.setStatusCode(Const.ERROR_CODE_USER__LOGIN_FAIL);
                         appResponse.setMessage(Const.ERROR_MSG_USER_LOGIN_FAIL);
+                    }else{
+                        map.put("user",sysUser);
+                        appResponse.setStatusCode(Const.SUCCESS_CODE_CALLBACK);
+                        appResponse.setMessage(Const.ERROR_MSG_USER_LOGIN_SUCCESS);
                     }
                 }
                 HttpSession session = request.getSession();

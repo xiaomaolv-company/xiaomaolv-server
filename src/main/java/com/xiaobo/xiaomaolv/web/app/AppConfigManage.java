@@ -32,7 +32,7 @@ public class AppConfigManage{
         List<HashMap<String,Object>> appData = appService.queryAllTabBar();
         appResponse.setAppData(appData);
         appResponse.setMessage(Const.ERROR_MSG_QUERY_SUCCESS);
-        appResponse.setStatusCode(200);
+        appResponse.setStatusCode(Const.SUCCESS_CODE_CALLBACK);
         return appResponse;
     }
 

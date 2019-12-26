@@ -40,4 +40,7 @@ public class Const {
     public final static String ERROR_MSG_QUERY_FAIL = "system query fail";
     public final static String ERROR_MSG_USER_LOGIN_SUCCESS = "user login success";
     public final static String ERROR_MSG_USER_LOGIN_FAIL = "user login fail";
+
+    //*****************successCode
+    public final static int SUCCESS_CODE_CALLBACK=200;
 }

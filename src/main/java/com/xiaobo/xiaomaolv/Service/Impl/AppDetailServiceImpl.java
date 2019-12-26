@@ -1,6 +1,7 @@
 package com.xiaobo.xiaomaolv.Service.Impl;
 
 import com.xiaobo.xiaomaolv.Service.AppDetailService;
+import com.xiaobo.xiaomaolv.constdata.Const;
 import com.xiaobo.xiaomaolv.dao.AppDao;
 import com.xiaobo.xiaomaolv.dao.AppDetailDao;
 import com.xiaobo.xiaomaolv.dto.UserSession;
@@ -40,7 +41,7 @@ public class AppDetailServiceImpl implements AppDetailService {
         List<CostRecorder> recorderList = appDetailDao.queryDetail(costRecorder);
         Map<String,Object> recorderMap = new HashMap<>();
         recorderMap.put("recorderList",recorderList);
-        AppResponse appResponse = new AppResponse(recorderMap,200,"消费记录信息");
+        AppResponse appResponse = new AppResponse(recorderMap, Const.SUCCESS_CODE_CALLBACK,"消费记录信息");
         return appResponse;
     }
 
