@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface AppService {
+    public final static String SYSTABBAR = "systabbar";
+    public final  static  String COSTCONFIG = "costconfig";
     /**
      * 获取底部菜单信息
      * @return

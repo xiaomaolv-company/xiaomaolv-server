@@ -25,6 +25,7 @@ public class JedisUtil {
         return jedisPool.getResource();
     }
 
+
     /**
      * 领用redis  incr属性实现自增id
      * @return   返回自增后id的值
@@ -34,6 +35,18 @@ public class JedisUtil {
         long value = jedis.incr("id");
         jedis.close();
         return value;
+    }
+
+    /**
+     * 判断键在redis中是否存在
+     * @param key
+     * @return
+     */
+    public boolean isExistKey(String key){
+        Jedis jedis = getResource();
+        boolean exist = jedis.exists(key);
+        jedis.close();
+        return exist;
     }
 
 

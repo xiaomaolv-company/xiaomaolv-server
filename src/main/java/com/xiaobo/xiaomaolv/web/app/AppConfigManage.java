@@ -3,6 +3,7 @@ package com.xiaobo.xiaomaolv.web.app;
 import com.xiaobo.xiaomaolv.Service.AppService;
 import com.xiaobo.xiaomaolv.constdata.Const;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
+import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
