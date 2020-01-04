@@ -46,4 +46,27 @@
         )
 
     </insert>
+
+    <select id="queryUserData" parameterType="java.util.Map"
+            resultType="com.xiaobo.xiaomaolv.entity.SysUser">
+        select
+        id,
+        uuid,
+        code,
+        name,
+        wechatId,
+        mobile,
+        address,
+        age,
+        sex,
+        type,
+        registeDatetime,
+        remark,
+        avater,
+        province,
+        city
+        from
+        sysuser
+        where id=#{userId}
+    </select>
 </mapper>

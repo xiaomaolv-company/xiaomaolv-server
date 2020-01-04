@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaobo.xiaomaolv.dao.BillDao">
+    <select id="queryBillByMonth" parameterType="java.util.Map"
+            resultType="java.util.Map">
+        -- 由年 参数  获取当年  12月的收入 支出 情况
+		SELECT
+			e.month,
+			pay,
+			income,
+			income - pay AS balance
+		FROM
+			(
+			SELECT
+				createmonth AS 'month',
+				sum( CASE type WHEN '支出' THEN balance END ) AS 'pay',
+				sum( CASE type WHEN '收入' THEN balance END ) AS 'income'
+			FROM
+				(
+				SELECT
+					sum( c.balance ) AS balance,
+				CASE
+
+						WHEN c.type = 1 THEN
+						'支出'
+						WHEN c.type = 2 THEN
+						'收入'
+					END AS type,
+					c.createyear,
+					c.createmonth
+				FROM
+					(
+					SELECT
+						a.balance,
+						b.type,
+						DATE_FORMAT( a.createDatetime, '%Y' ) AS createyear,
+						DATE_FORMAT( a.createDatetime, '%m' ) AS createmonth
+					FROM
+						costrecorder a
+						LEFT JOIN costconfig b ON a.configId = b.id
+					WHERE
+						a.userId = #{userId}
+					) c
+				WHERE
+					c.createyear = #{year}
+				GROUP BY
+					c.createmonth,
+					type
+				) d
+			GROUP BY
+		MONTH
+			) e
+    </select>
+</mapper>

@@ -11,5 +11,5 @@ public interface AppDetailService {
      */
     AppResponse addCostRecorder(CostRecorder costRecorder);
 
-    AppResponse queryCostDetail();
+    AppResponse queryCostDetail(CostRecorder costRecorder);
 }
