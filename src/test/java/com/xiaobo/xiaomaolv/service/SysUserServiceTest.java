@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.lang.reflect.Method;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SysUserServiceTest {
@@ -21,6 +23,7 @@ public class SysUserServiceTest {
     private SysUserService sysUserService;
     @Autowired
     private OperationLogUtil operationLogUtil;
+
 
     @Test
     public void userServiceTest(){
@@ -39,12 +42,8 @@ public class SysUserServiceTest {
     }
     @Test
     public void operationTest(){
-        int i = operationLogUtil.addOperation(10001,"测试记录","备注");
-        assert i>0;
-    }
-
-    @Test
-    public void costRecorder(){
 
     }
+
+
 }

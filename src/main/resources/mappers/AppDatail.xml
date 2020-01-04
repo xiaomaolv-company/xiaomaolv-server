@@ -18,11 +18,16 @@
 
     </insert>
     <select id="queryDetail" parameterType="com.xiaobo.xiaomaolv.entity.CostRecorder"
-            resultType="com.xiaobo.xiaomaolv.entity.CostRecorder">
+            resultType="java.util.HashMap">
         select
-        *
+        a.id,
+        a.uuid,
+        balance,
+        b.name as costConfigName,
+        b.icon
         from
-        costrecorder
+        costrecorder a
+        left join costconfig b on a.configId=b.id
         where userId=#{userId}
     </select>
 </mapper>

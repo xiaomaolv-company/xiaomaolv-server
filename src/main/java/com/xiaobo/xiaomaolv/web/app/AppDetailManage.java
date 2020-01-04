@@ -16,21 +16,22 @@ public class AppDetailManage {
 
     @RequestMapping(value = "/addCostDetail",method = RequestMethod.POST)
     public AppResponse addCost(@RequestBody CostRecorder costRecorder){
-        AppResponse appResponse = new AppResponse();
-        int result = appDetailService.addCostRecorder(costRecorder);
-        if(result==1){
-            appResponse.setMessage(Const.ERROR_MSG_INSERT_SUCCESS);
-            appResponse.setAppData(costRecorder);
-            appResponse.setStatusCode(Const.SUCCESS_CODE_CALLBACK);
-        }else{
-            appResponse.setStatusCode(Const.ERROR_CODE_INSERT_FAIL);
-            appResponse.setMessage(Const.ERROR_MSG_INSERT_SUCCESS);
-            appResponse.setAppData(costRecorder);
-        }
-        return appResponse;
+        return appDetailService.addCostRecorder(costRecorder);
+//        AppResponse appResponse = new AppResponse();
+//        int result = appDetailService.addCostRecorder(costRecorder);
+//        if(result==1){
+//            appResponse.setMessage(Const.ERROR_MSG_INSERT_SUCCESS);
+//            appResponse.setAppData(costRecorder);
+//            appResponse.setStatusCode(Const.SUCCESS_CODE_CALLBACK);
+//        }else{
+//            appResponse.setStatusCode(Const.ERROR_CODE_INSERT_FAIL);
+//            appResponse.setMessage(Const.ERROR_MSG_INSERT_SUCCESS);
+//            appResponse.setAppData(costRecorder);
+//        }
+//        return appResponse;
     }
 
-    @RequestMapping(value = "/queryCostList",method = RequestMethod.POST)
+    @RequestMapping(value = "/queryCostList",method = {RequestMethod.POST,RequestMethod.GET })
     public AppResponse queryCostListByUserId(){
         return appDetailService.queryCostDetail();
     }
