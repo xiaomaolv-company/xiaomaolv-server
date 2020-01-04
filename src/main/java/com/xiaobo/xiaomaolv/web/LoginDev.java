@@ -1,5 +1,7 @@
 package com.xiaobo.xiaomaolv.web;
 
+import com.xiaobo.xiaomaolv.constdata.Const;
+import com.xiaobo.xiaomaolv.dto.UserSession;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.SysUser;
 import org.slf4j.Logger;
@@ -18,19 +20,17 @@ public class LoginDev {
     Logger log = LoggerFactory.getLogger(LoginDev.class);
 
     @RequestMapping("loginDev")
-    public AppResponse loginDev(HttpServletRequest request, HttpServletResponse response, SysUser sysUser) throws Exception{
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("connection", "keep-alive");
-//        response.addHeader("Access-Control-Allow-Method", "*");
-//        response.addHeader("Access-Control-Allow-Headers","Content-Type");
-//        response.addHeader("Access-Control-Max-Age", "3600");
+    public AppResponse loginDev(HttpServletRequest request,SysUser sysUser){
         AppResponse appResponse = new AppResponse();
+        //登陆时候创建session
+        HttpSession session =  request.getSession();
+        session.setAttribute(Const.USER_ID,sysUser.getId());
+        UserSession.setProperty(Const.USER_ID,sysUser.getId());
         log.info("登陆用户id"+sysUser.getId());
-        HttpSession session = request.getSession();
-        log.info(session.getId()+"sessionID");
-        session.setAttribute("userId",sysUser.getId());
+        log.info(session.getId()+":sessionID");
         appResponse.setAppData(sysUser);
-        appResponse.setMessage("登陆成功");
+        appResponse.setMessage(Const.ERROR_MSG_USER_LOGIN_SUCCESS);
+        appResponse.setStatusCode(200);
         return appResponse;
     }
 }

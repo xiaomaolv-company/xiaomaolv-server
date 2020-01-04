@@ -6,7 +6,6 @@ import com.xiaobo.xiaomaolv.util.OperationLogUtil;
 import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
@@ -41,14 +40,16 @@ public class ApplicationConfig implements WebMvcConfigurer, BeanPostProcessor {
         return operationLogUtil;
     }
 
+
+
     /**
      *注册登录拦截器
      * @param registry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(loginInterceptor);
-//        logger.info("登录拦截器注册成功");
+        registry.addInterceptor(loginInterceptor);
+        logger.info("登录拦截器注册成功");
     }
 
 
