@@ -89,6 +89,14 @@ public class JedisUtil {
     }
 
 
+    public long del(String... keys){
+        Jedis jedis = getResource();
+        long count = jedis.del(keys);
+        jedis.close();
+        return count;
+    }
+
+
     /******list操作**********/
     public long rpush(String key,String value){
         Jedis jedis = getResource();

@@ -9,7 +9,7 @@ public interface AppDetailService {
      * @param costRecorder
      * @return
      */
-    int addCostRecorder(CostRecorder costRecorder);
+    AppResponse addCostRecorder(CostRecorder costRecorder);
 
     AppResponse queryCostDetail();
 }

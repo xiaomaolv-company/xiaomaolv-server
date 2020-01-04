@@ -16,7 +16,7 @@ import redis.clients.jedis.JedisPool;
 import javax.servlet.ServletContext;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RedisTest {
 
 //    @Autowired
@@ -24,12 +24,12 @@ public class RedisTest {
     @Autowired
     private JedisUtil jedisUtil;
 
-//    @Test
-//    public void testJedisDemo01(){
-//        Jedis jedis = jedisPool.getResource();
-//        String value = jedis.get("id");
-//        assert (value!=null);
-//    }
+    @Test
+    public void testJedisDemo01(){
+        String ss = jedisUtil.get("aaa");
+        System.out.println(ss);
+        assert ss!=null;
+    }
 
     @Test
     public void tetsJedisDemo02(){
