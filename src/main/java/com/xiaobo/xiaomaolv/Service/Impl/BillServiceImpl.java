@@ -25,6 +25,7 @@ public class BillServiceImpl implements BillService {
         map.put("userId", UserSession.getUserId());
         map.put("year",billParamer.getYear());
         List<Map<String,Object>> billList = billDao.queryBillByMonth(map);
+        //0000000
         AppResponse appResponse = new AppResponse(billList,200, Const.ERROR_MSG_QUERY_SUCCESS);
         return appResponse;
     }
