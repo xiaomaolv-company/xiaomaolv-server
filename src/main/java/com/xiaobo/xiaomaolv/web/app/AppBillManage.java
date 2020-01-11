@@ -23,5 +23,6 @@ public class AppBillManage {
     public static class BillParamer{
         private long userId;
         private String year;
+        private String month;
     }
 }

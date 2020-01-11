@@ -24,8 +24,12 @@ public class BillServiceImpl implements BillService {
         Map<String,Object> map = new HashMap<>();
         map.put("userId", UserSession.getUserId());
         map.put("year",billParamer.getYear());
-        List<Map<String,Object>> billList = billDao.queryBillByMonth(map);
-        AppResponse appResponse = new AppResponse(billList,200, Const.ERROR_MSG_QUERY_SUCCESS);
+        List<Map<String,String>> monthBill = billDao.queryBillByMonth(map);
+        List<Map<String,String>> yearBill = billDao.queryBillByYear(map);
+        Map<String,Object> monthYearBill = new HashMap<>();
+        monthYearBill.put("monthBill",monthBill);
+        monthYearBill.put("yearBill",yearBill);
+        AppResponse appResponse = new AppResponse(monthYearBill,200, Const.ERROR_MSG_QUERY_SUCCESS);
         return appResponse;
     }
 }
