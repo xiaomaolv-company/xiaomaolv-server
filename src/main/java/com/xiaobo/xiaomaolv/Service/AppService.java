@@ -1,5 +1,6 @@
 package com.xiaobo.xiaomaolv.Service;
 
+import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.CostConfig;
 import com.xiaobo.xiaomaolv.entity.CostRecorder;
 
@@ -22,4 +23,5 @@ public interface AppService {
     List<CostConfig> queryAllConfig();
 
 
+    AppResponse queryUserData();
 }

@@ -3,7 +3,7 @@ package com.xiaobo.xiaomaolv.entity;
 import lombok.Data;
 
 @Data
-public class CostRecorder {
+public class CostRecorder extends PageParam {
     private long id;
     private String uuid;
     private float balance;

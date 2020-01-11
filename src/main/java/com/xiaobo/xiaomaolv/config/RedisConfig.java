@@ -48,10 +48,11 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * 创建redis连接池的设置
+     *
      * @return
      */
     @Bean
-    public JedisPoolConfig jedisPoolConfig(){
+    public JedisPoolConfig jedisPoolConfig() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxTotal(maxTotal);
         jedisPoolConfig.setMaxIdle(maxIdle);
@@ -61,23 +62,25 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     /**
-     *创建redis连接池
+     * 创建redis连接池
+     *
      * @return
      */
     @Bean
-    public JedisPool redisPoolFactory(){
-        JedisPool jedisPool = new JedisPool(jedisPoolConfig,hostName,port,timeOut,password);
+    public JedisPool redisPoolFactory() {
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig, hostName, port, timeOut, password);
         logger.info("JedisPool注入成功");
-        logger.info("redis地址:"+hostName+",端口:"+port);
+        logger.info("redis地址:" + hostName + ",端口:" + port);
         return jedisPool;
     }
 
     /**
-     *创建redis的工具类  封装redis的连接以进行相关操作
+     * 创建redis的工具类  封装redis的连接以进行相关操作
+     *
      * @return
      */
     @Bean
-    public JedisUtil jedisUtil(){
+    public JedisUtil jedisUtil() {
         JedisUtil jedisUtil = new JedisUtil();
         jedisUtil.setJedisPool(jedisPool);
         return jedisUtil;

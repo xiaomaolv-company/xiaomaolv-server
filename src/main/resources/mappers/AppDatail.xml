@@ -29,5 +29,7 @@
         costrecorder a
         left join costconfig b on a.configId=b.id
         where userId=#{userId}
+		limit #{page},#{rows}
     </select>
+
 </mapper>

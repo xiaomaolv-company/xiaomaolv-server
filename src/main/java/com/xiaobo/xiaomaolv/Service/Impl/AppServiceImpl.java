@@ -6,9 +6,13 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xiaobo.xiaomaolv.Service.AppService;
+import com.xiaobo.xiaomaolv.constdata.Const;
 import com.xiaobo.xiaomaolv.dao.AppDao;
+import com.xiaobo.xiaomaolv.dto.UserSession;
+import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.CostConfig;
 import com.xiaobo.xiaomaolv.entity.SysTabBar;
+import com.xiaobo.xiaomaolv.entity.SysUser;
 import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AppServiceImpl implements AppService {
@@ -97,6 +102,21 @@ public class AppServiceImpl implements AppService {
             }
         }
         return list;
+    }
+
+    @Override
+    public AppResponse queryUserData() {
+        AppResponse appResponse = new AppResponse();
+        Map<String,Object> map = new HashMap<>();
+        long userId = UserSession.getUserId();
+        map.put("userId",userId);
+        SysUser sysUser = appDao.queryUserData(map);
+        if(sysUser!=null){
+            appResponse.setStatusCode(Const.SUCCESS_CODE_CALLBACK);
+            appResponse.setAppData(sysUser);
+            appResponse.setMessage(Const.ERROR_MSG_QUERY_SUCCESS);
+        }
+        return appResponse;
     }
 
 

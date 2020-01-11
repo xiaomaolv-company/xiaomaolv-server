@@ -37,12 +37,6 @@ public class AppDetailServiceImpl implements AppDetailService {
         costRecorder.setId(jedisUtil.generateId());
         costRecorder.setCreateDatetime(dateTime.toString("yyyy-MM-dd HH:mm:ss"));
         int result = appDetailDao.addCostRecorder(costRecorder);
-        //清除redis个人消费信息
-        //判断redis中是否有此用户的消费信息键
-        String userId = UserSession.getUserId()+"";
-        if(jedisUtil.isExistKey(userId)){
-            jedisUtil.del(userId);
-        }
         if(result==1){
             appResponse.setMessage(Const.ERROR_MSG_INSERT_SUCCESS);
             appResponse.setAppData(costRecorder);
@@ -57,36 +51,13 @@ public class AppDetailServiceImpl implements AppDetailService {
     }
 
     @Override
-    public AppResponse queryCostDetail() {
+    public AppResponse queryCostDetail(CostRecorder costRecorder) {
         long userId = UserSession.getUserId();
-        CostRecorder costRecorder = new CostRecorder();
         costRecorder.setUserId(userId);
-        String userIdStr = userId+"";
-        //先去redis中查询
-        String userCostList = jedisUtil.get(userIdStr);
-        List<HashMap<String,Object>> recorderList = null;
-        if(userCostList==null){
-            //如果redis中没有则取数据库中查询
-            recorderList = appDetailDao.queryDetail(costRecorder);
-            //将数据库中的查询到的数据存入redis中
-            ObjectMapper objectMapper = new ObjectMapper();
-            String jsonStr = null;
-            try {
-                jsonStr = objectMapper.writeValueAsString(recorderList);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            jedisUtil.set(userIdStr,jsonStr);
-        }else{
-            String jsonStr = jedisUtil.get(userIdStr);
-            ObjectMapper mapper = new ObjectMapper();
-            JavaType javaType = mapper.getTypeFactory().constructParametricType(ArrayList.class,HashMap.class);
-            try {
-                recorderList = mapper.readValue(jsonStr,javaType);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        int page = costRecorder.getPage();
+        int rows = costRecorder.getRows();
+        costRecorder.setPage((page-1)*rows);
+        List<HashMap<String,Object>> recorderList = appDetailDao.queryDetail(costRecorder);
         Map<String, Object> recorderMap = new HashMap<>();
         recorderMap.put("recorderList", recorderList);
         AppResponse appResponse = new AppResponse(recorderMap, Const.SUCCESS_CODE_CALLBACK, "消费记录信息");
