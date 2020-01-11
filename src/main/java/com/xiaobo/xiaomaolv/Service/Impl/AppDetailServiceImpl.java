@@ -6,11 +6,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xiaobo.xiaomaolv.Service.AppDetailService;
 import com.xiaobo.xiaomaolv.constdata.Const;
 import com.xiaobo.xiaomaolv.dao.AppDetailDao;
+import com.xiaobo.xiaomaolv.dao.BillDao;
 import com.xiaobo.xiaomaolv.dto.UserSession;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.CostRecorder;
 import com.xiaobo.xiaomaolv.util.IdUtils;
 import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
+import com.xiaobo.xiaomaolv.web.app.AppBillManage;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,8 @@ public class AppDetailServiceImpl implements AppDetailService {
     private AppDetailDao appDetailDao;
     @Autowired
     private JedisUtil jedisUtil;
+    @Autowired
+    private BillDao billDao;
 
     @Override
     public AppResponse addCostRecorder(CostRecorder costRecorder) {
@@ -51,16 +55,24 @@ public class AppDetailServiceImpl implements AppDetailService {
     }
 
     @Override
-    public AppResponse queryCostDetail(CostRecorder costRecorder) {
+    public AppResponse queryCostDetail(AppBillManage.BillParamer paramer) {
         long userId = UserSession.getUserId();
-        costRecorder.setUserId(userId);
-        int page = costRecorder.getPage();
-        int rows = costRecorder.getRows();
-        costRecorder.setPage((page-1)*rows);
-        List<HashMap<String,Object>> recorderList = appDetailDao.queryDetail(costRecorder);
-        Map<String, Object> recorderMap = new HashMap<>();
-        recorderMap.put("recorderList", recorderList);
-        AppResponse appResponse = new AppResponse(recorderMap, Const.SUCCESS_CODE_CALLBACK, "消费记录信息");
+        paramer.setUserId(userId);
+        int page = paramer.getPage();
+        int rows = paramer.getRows();
+        paramer.setPage((page-1)*rows);
+        Map<String,Object> billMonthMapParam = new HashMap<>();
+        billMonthMapParam.put("userId",userId);
+        billMonthMapParam.put("year",paramer.getYear());
+        billMonthMapParam.put("month",paramer.getMonth());
+        billMonthMapParam.put("page",paramer.getPage());
+        billMonthMapParam.put("rows",rows);
+        List<HashMap<String,Object>> recorderList = appDetailDao.queryDetail(billMonthMapParam);
+        List<Map<String,String>> monthSumData = billDao.queryBillByMonth(billMonthMapParam);
+        Map<String,Object> map = new HashMap<>();
+        map.put("recorderList",recorderList);
+        map.put("monthSumData",monthSumData);
+        AppResponse appResponse = new AppResponse(map, Const.SUCCESS_CODE_CALLBACK, "消费记录信息");
         return appResponse;
     }
 
