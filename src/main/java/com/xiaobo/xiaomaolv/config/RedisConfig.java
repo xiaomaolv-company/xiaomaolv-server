@@ -36,6 +36,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Value("${redis.password}")
     private String password;
+
     @Value("${redis.timeout}")
     private int timeOut;
 

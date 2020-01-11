@@ -5,4 +5,5 @@ import com.xiaobo.xiaomaolv.web.app.AppBillManage;
 
 public interface BillService {
     AppResponse queryBillByMonth(AppBillManage.BillParamer billParamer);
+
 }

@@ -3,6 +3,7 @@ package com.xiaobo.xiaomaolv.web.app;
 import com.xiaobo.xiaomaolv.Service.BillService;
 import com.xiaobo.xiaomaolv.Service.Impl.BillServiceImpl;
 import com.xiaobo.xiaomaolv.entity.AppResponse;
+import com.xiaobo.xiaomaolv.entity.PageParam;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,9 @@ public class AppBillManage {
     }
 
     @Data
-    public static class BillParamer{
+    public static class BillParamer extends PageParam {
         private long userId;
         private String year;
+        private String month;
     }
 }

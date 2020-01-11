@@ -6,10 +6,10 @@
             resultType="java.util.Map">
         -- 由年 参数  获取当年  12月的收入 支出 情况
 		SELECT
-			e.month,
-			pay,
-			income,
-			income - pay AS balance
+			concat(e.month,'月') as month,
+			IFNULL(pay,0) as pay,
+			IFNULL(income,0) as income,
+			(IFNULL(income,0) - IFNULL(pay,0)) AS balance
 		FROM
 			(
 			SELECT
@@ -44,6 +44,9 @@
 					) c
 				WHERE
 					c.createyear = #{year}
+					<if test="month!=null and month!=''">
+						and c.createmonth = #{month}
+					</if>
 				GROUP BY
 					c.createmonth,
 					type
@@ -51,5 +54,52 @@
 			GROUP BY
 		MONTH
 			) e
+    </select>
+
+
+	<select id="queryBillByYear" parameterType="java.util.Map"
+			resultType="java.util.Map">
+        SELECT
+		IFNULL(income,0) as income,
+		IFNULL(pay,0) as pay,
+		(IFNULL(income,0) - IFNULL(pay,0)) AS balance
+		FROM
+		(
+		SELECT
+			sum( CASE type WHEN 1 THEN balance END ) AS 'pay',
+			sum( CASE type WHEN 2 THEN balance END ) AS 'income'
+		FROM
+			(
+			SELECT
+				sum( c.balance ) AS balance,
+				type
+			FROM
+				(
+				SELECT
+					balance,
+					type,
+					createyear,
+					createmonth
+				FROM
+					(
+					SELECT
+						a.balance,
+						b.type,
+						DATE_FORMAT( a.createDatetime, '%Y' ) AS createyear,
+						DATE_FORMAT( a.createDatetime, '%m' ) AS createmonth
+					FROM
+						costrecorder a
+						LEFT JOIN costconfig b ON a.configId = b.id
+					WHERE
+						a.userId = #{userId}
+					) b
+				WHERE
+					createyear = #{year}
+				) c
+			GROUP BY
+				c.createyear,
+				c.type
+			) d
+		) e
     </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.xiaobo.xiaomaolv.Service;
 
 import com.xiaobo.xiaomaolv.entity.AppResponse;
 import com.xiaobo.xiaomaolv.entity.CostRecorder;
+import com.xiaobo.xiaomaolv.web.app.AppBillManage;
 
 public interface AppDetailService {
     /**
@@ -11,5 +12,5 @@ public interface AppDetailService {
      */
     AppResponse addCostRecorder(CostRecorder costRecorder);
 
-    AppResponse queryCostDetail(CostRecorder costRecorder);
+    AppResponse queryCostDetail(AppBillManage.BillParamer paramer);
 }

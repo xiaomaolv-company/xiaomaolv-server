@@ -17,19 +17,30 @@
         )
 
     </insert>
-    <select id="queryDetail" parameterType="com.xiaobo.xiaomaolv.entity.CostRecorder"
+    <select id="queryDetail" parameterType="java.util.Map"
             resultType="java.util.HashMap">
-        select
-        a.id,
-        a.uuid,
-        balance,
-        b.name as costConfigName,
-        b.icon
-        from
-        costrecorder a
-        left join costconfig b on a.configId=b.id
-        where userId=#{userId}
-		limit #{page},#{rows}
+        SELECT
+        *
+        FROM
+            (
+            SELECT
+                a.id,
+                a.uuid,
+                balance,
+                b.NAME AS costConfigName,
+                b.icon,
+                DATE_FORMAT( a.createDatetime, '%Y' ) AS createyear,
+                DATE_FORMAT( a.createDatetime, '%m' ) AS createmonth
+            FROM
+                costrecorder a
+                LEFT JOIN costconfig b ON a.configId = b.id
+            WHERE
+                userId = #{userId}
+            ) b
+        WHERE
+            b.createyear = #{year}
+            AND b.createmonth = #{month}
+        LIMIT #{page},#{rows}
     </select>
 
 </mapper>

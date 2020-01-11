@@ -7,5 +7,7 @@ import java.util.Map;
 
 @Repository
 public interface BillDao {
-    List<Map<String,Object>> queryBillByMonth(Map map);
+    List<Map<String,String>> queryBillByMonth(Map map);
+
+    List<Map<String, String>> queryBillByYear(Map<String, Object> map);
 }
