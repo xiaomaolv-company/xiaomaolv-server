@@ -65,4 +65,19 @@
           #{avater},#{province},#{country},#{city},#{privilege},#{password}
           )
     </insert>
+    <select id="queryAccountInfo" parameterType="java.util.Map"
+            resultType="java.util.Map">
+        SELECT
+	    count( * ) AS loginDays,
+        (
+            select count(*)  from costrecorder where userId=#{userId}
+        ) as totalBills
+        FROM
+	    ( SELECT DISTINCT DATE_FORMAT( loginDatetime, '%Y-%m-%d' ) AS createyear FROM visitlog WHERE userId = #{userId} ) a
+    </select>
+    <select id="queryMineAccountInfo" parameterType="java.util.Map"
+            resultType="java.util.Map" statementType="CALLABLE">
+        {call pro_continuelogin(#{userId})}
+    </select>
+
 </mapper>

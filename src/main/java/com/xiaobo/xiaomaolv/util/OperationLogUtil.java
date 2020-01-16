@@ -6,6 +6,7 @@ import com.xiaobo.xiaomaolv.entity.SysOperation;
 import com.xiaobo.xiaomaolv.entity.VisitLog;
 import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class OperationLogUtil {
@@ -63,6 +64,7 @@ public class OperationLogUtil {
         sysOperation.setRemark(remark);
         return sysOperationService.addOperation(sysOperation);
     }
+
 
 
 }

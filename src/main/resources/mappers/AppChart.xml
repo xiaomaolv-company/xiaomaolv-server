@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaobo.xiaomaolv.dao.AppChartDao">
+    <select id="getChartData" parameterType="com.xiaobo.xiaomaolv.entity.ChartData"
+            resultType="java.util.Map">
+        select
+        a.*
+        from
+        viewCostRecorder a
+        <where>
+            <if test="year!=null">
+                a.year=#{year}
+            </if>
+            <if test="month!=null">
+                and a.month = #{month}
+            </if>
+            <if test="day!=null">
+                and a.day = #{day}
+            </if>
+            <if test="week!=null">
+                and a.week = #{week}
+            </if>
+            <if test="userId!=null">
+                and a.userId = #{userId}
+            </if>
+            <if test="type!=null">
+                and a.type = #{type}
+            </if>
+        </where>
+    </select>
+
+</mapper>

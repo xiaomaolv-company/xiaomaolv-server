@@ -6,18 +6,19 @@ import com.xiaobo.xiaomaolv.util.OperationLogUtil;
 import com.xiaobo.xiaomaolv.util.Redis.JedisUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanClassLoaderAware;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 
 @Configuration
-public class ApplicationConfig implements WebMvcConfigurer, BeanPostProcessor {
+public class ApplicationConfig implements WebMvcConfigurer{
 
     Logger logger = LoggerFactory.getLogger(ApplicationConfig.class);
 
@@ -53,6 +54,8 @@ public class ApplicationConfig implements WebMvcConfigurer, BeanPostProcessor {
         registry.addInterceptor(loginInterceptor);
         logger.info("登录拦截器注册成功");
     }
+
+
 
 
 }

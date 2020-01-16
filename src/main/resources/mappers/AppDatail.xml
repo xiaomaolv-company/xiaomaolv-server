@@ -30,7 +30,8 @@
                 b.NAME AS costConfigName,
                 b.icon,
                 DATE_FORMAT( a.createDatetime, '%Y' ) AS createyear,
-                DATE_FORMAT( a.createDatetime, '%m' ) AS createmonth
+                DATE_FORMAT( a.createDatetime, '%m' ) AS createmonth,
+                a.createDatetime
             FROM
                 costrecorder a
                 LEFT JOIN costconfig b ON a.configId = b.id
@@ -40,6 +41,7 @@
         WHERE
             b.createyear = #{year}
             AND b.createmonth = #{month}
+            order by createDatetime desc
         LIMIT #{page},#{rows}
     </select>
 

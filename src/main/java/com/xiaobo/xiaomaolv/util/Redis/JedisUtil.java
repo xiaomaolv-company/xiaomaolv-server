@@ -1,5 +1,9 @@
 package com.xiaobo.xiaomaolv.util.Redis;
 
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.Jedis;
@@ -13,7 +17,7 @@ import java.util.List;
  * @author yanxiaobo
  */
 
-public class JedisUtil {
+public class JedisUtil{
 
     private JedisPool jedisPool;
 
@@ -123,6 +127,7 @@ public class JedisUtil {
         jedis.close();
         return count;
     }
+
 
 
 }
