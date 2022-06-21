@@ -60,7 +60,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.37</version>
+            <version>8.0.28</version>
         </dependency>
         <!--lobbok插件  @Data注解提供get set方法-->
         <dependency>
